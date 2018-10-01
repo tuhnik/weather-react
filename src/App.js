@@ -71,7 +71,7 @@ class App extends Component {
 
   render() {
     return <div className="App container">
-        <h1 className= "title is-2"> ☁️ React Weather 0.2</h1> // eslint-disable-next-line
+        <h1 className= "title is-2"> ☁️ React Weather 0.2</h1> 
         <InputForm formSubmitted={this.formSubmitted.bind(this)} inputChanged={this.inputChanged.bind(this)} inputValue={this.state.inputValue} placeholder="Enter city" isLoading={this.state.isLoading} />
         {this.state.weatherData &&       <div className="card card-container">
           <div className="card-image">
