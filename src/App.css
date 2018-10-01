@@ -2,13 +2,23 @@
   border: 1px solid rgb(224, 224, 224);
   margin: 1px;
 } */
-
+* {
+  box-sizing: border-box
+}
 .App {
-  width: 30%;
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 4rem;
+  text-align: center;
 }
 
+.input-form {
+  width: 50%;
+}
 .card-container {
-  margin: 30px;
+ margin-top: 10px;
 }
 
 .degrees {
@@ -18,3 +28,11 @@
  color: black;
 }
 
+.error {
+  margin-top: 10px;
+}
+
+.weather-string{
+  font-style: italic;
+  color: gray;
+}

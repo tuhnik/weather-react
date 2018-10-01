@@ -8,8 +8,18 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 
 const Map = withScriptjs(withGoogleMap((props) => 
   <GoogleMap
-    defaultZoom={8}
+    defaultZoom={10}
     defaultCenter={{ lat: props.coord.lat, lng: props.coord.lon }}
+    defaultOptions={{
+     // these following 7 options turn certain controls off see link below
+      streetViewControl: false,
+      scaleControl: false,
+      mapTypeControl: false,
+      panControl: false,
+      zoomControl: false,
+      rotateControl: false,
+      fullscreenControl: false
+    }}
     center={{ lat: props.coord.lat, lng: props.coord.lon }}
   >
     {props.isMarkerShown && <Marker position={{ lat: props.coord.lat, lng: props.coord.lon }} />}
@@ -61,7 +71,7 @@ class App extends Component {
 
   render() {
     return <div className="App container">
-        <h1>React Weather 0.1</h1>
+        <h1 className= "title is-2"> ☁️ React Weather 0.2</h1> // eslint-disable-next-line
         <InputForm formSubmitted={this.formSubmitted.bind(this)} inputChanged={this.inputChanged.bind(this)} inputValue={this.state.inputValue} placeholder="Enter city" isLoading={this.state.isLoading} />
         {this.state.weatherData &&       <div className="card card-container">
           <div className="card-image">
@@ -74,7 +84,7 @@ class App extends Component {
                 <div className="media-content">
                   <p className="title is-4">{
                     this.state.weatherData.name + ", " + this.state.weatherData.sys.country}</p>
-                  <p className="subtitle is-6">{this.state.weatherData.weather[0].description}</p>
+                  <p className="subtitle is-5 weather-string">{this.state.weatherData.weather[0].description}</p>
                 </div>
               </div>
               <div className="content">
@@ -85,7 +95,7 @@ class App extends Component {
         </div>}
         {this.state.error && 
       
-        <div className="notification is-danger">{this.state.error.message}</div>
+        <div className="notification is-danger error">{this.state.error.message}</div>
       
         }
         {/* <div>
