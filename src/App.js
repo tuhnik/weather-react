@@ -11,7 +11,6 @@ const Map = withScriptjs(withGoogleMap((props) =>
     defaultZoom={10}
     defaultCenter={{ lat: props.coord.lat, lng: props.coord.lon }}
     defaultOptions={{
-     // these following 7 options turn certain controls off see link below
       streetViewControl: false,
       scaleControl: false,
       mapTypeControl: false,
