@@ -1,0 +1,20 @@
+/* * {
+  border: 1px solid rgb(224, 224, 224);
+  margin: 1px;
+} */
+
+.App {
+  width: 30%;
+}
+
+.card-container {
+  margin: 30px;
+}
+
+.degrees {
+ line-height: 4rem;
+ font-size: 4rem;
+ font-weight: bold;
+ color: black;
+}
+
