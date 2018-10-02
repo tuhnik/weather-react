@@ -45,7 +45,8 @@ div.block.favs {
   margin-bottom: 0px;
 }
 span.tag.light {
-  cursor: pointer
+  cursor: pointer;
+  user-select: none;
 }
 span.tag.light:hover {
   background-color: rgb(224, 224, 224);
