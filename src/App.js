@@ -29,7 +29,8 @@ const Map = withScriptjs(withGoogleMap((props) =>
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {inputValue: '', searchTerm: '', weatherData: null, error: null, isLoading: false, coord: {lat: 58.24, lon: 25.92}};
+    this.state = {inputValue: '', searchTerm: '', weatherData: null, error: null, isLoading: false, coord: {lat: 58.24, lon: 25.92},
+  favs: ["Tartu, EE", "Tarvastu, EE", "Mustla, EE", "Viimsi, EE"]};
   }
   getWeatherData(str) {
     this.setState({isLoading: true})
@@ -67,11 +68,44 @@ class App extends Component {
   inputChanged(evt){
     this.setState({inputValue: evt.target.value})
   }
+  addToFavs(){
+    let fav = this.state.weatherData.name + ", " + this.state.weatherData.sys.country
+    let favs = [...this.state.favs]
+    if(favs.indexOf(fav) < 0){
+      favs.push(fav)
+      this.setState({favs})
+    }  
+  }
+
+  removeFromFavs(evt, i){
+    evt.stopPropagation()
+    let favs = [...this.state.favs]
+    favs.splice(i, 1)
+      this.setState({favs})
+  }
+
+  checkIfFavs(){
+    let fav = this.state.weatherData.name + ", " + this.state.weatherData.sys.country
+    let favs = [...this.state.favs]
+    if(favs.indexOf(fav) < 0){
+      return true
+    }  
+    return false
+  }
 
   render() {
     return <div className="App container">
-        <h1 className= "title is-2"> ☁️ React Weather 0.2</h1> 
+        <h1 className= "title is-2"> ☁️ React Weather 0.2</h1>   
         <InputForm formSubmitted={this.formSubmitted.bind(this)} inputChanged={this.inputChanged.bind(this)} inputValue={this.state.inputValue} placeholder="Enter city" isLoading={this.state.isLoading} />
+        <div class="block favs">
+      {this.state.favs.map((el, i)=>{
+          return <span onClick={()=>this.getWeatherData(el)} class="tag light">
+            {el}
+            <button class="delete is-small" onClick={(evt)=>this.removeFromFavs(evt,i)}></button>
+          </span>
+       
+      })}
+       </div>
         {this.state.weatherData &&       <div className="card card-container">
           <div className="card-image">
             {this.state.coord && <Map isMarkerShown coord={this.state.coord} googleMapURL={"https://maps.googleapis.com/maps/api/js?key=" + KEYS.MAPS_KEY + "&v=3.exp&libraries=geometry,drawing,places"} loadingElement={<div style={{ height: `100%` }} />} containerElement={<div style={{ height: `400px` }} />} mapElement={<div style={{ height: `100%` }} />} />}
@@ -85,9 +119,9 @@ class App extends Component {
                     this.state.weatherData.name + ", " + this.state.weatherData.sys.country}</p>
                   <p className="subtitle is-5 weather-string">{this.state.weatherData.weather[0].description}</p>
                 </div>
+                {this.checkIfFavs() && <a class="button is-info" onClick={this.addToFavs.bind(this)}>Fav</a>}              
               </div>
               <div className="content">
-                
               </div>
             </div>
           </div>

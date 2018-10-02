@@ -36,3 +36,20 @@
   font-style: italic;
   color: gray;
 }
+
+.favs {
+  margin: 10px;
+  outline: none;
+}
+div.block.favs {
+  margin-bottom: 0px;
+}
+span.tag.light {
+  cursor: pointer
+}
+span.tag.light:hover {
+  background-color: rgb(224, 224, 224);
+}
+.favs span {
+  margin: 5px;
+}
