@@ -29,7 +29,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {inputValue: '', searchTerm: '', weatherData: null, error: null, isLoading: false, coord: {lat: 58.24, lon: 25.92},
-    favs: ["Tarvastu, EE", "London, GB"]};
+    favs: []};
+  }
+  componentDidMount(){
+    let favs = localStorage.getItem("favs")
+    if(favs) {
+      this.setState({favs: JSON.parse(favs)})
+    }
   }
   getWeatherData(str) {
     this.setState({isLoading: true})
@@ -83,7 +89,7 @@ class App extends Component {
     let favs = [...this.state.favs]
     if(favs.indexOf(fav) < 0){
       favs.push(fav)
-      this.setState({favs})
+      this.setState({favs}, ()=>localStorage.setItem("favs", JSON.stringify(this.state.favs)))
     }  
   }
 
@@ -91,7 +97,7 @@ class App extends Component {
     evt.stopPropagation()
     let favs = [...this.state.favs]
     favs.splice(i, 1)
-      this.setState({favs})
+    this.setState({favs}, ()=>localStorage.setItem("favs", JSON.stringify(this.state.favs)))
   }
 
   checkIfFavs(){
@@ -105,7 +111,7 @@ class App extends Component {
 
   render() {
     return <div className="App container">
-        <h1 className= "title is-2"> <span style = {{cursor: "pointer"}}onClick={this.getGeoLocation.bind(this)}>☁️</span> React Weather 0.2</h1>   
+        <h1 className= "title is-2"> <span role="img" aria-label="geolocation"style = {{cursor: "pointer"}}onClick={this.getGeoLocation.bind(this)}>☁️</span> React Weather 0.2</h1>   
         <InputForm formSubmitted={this.formSubmitted.bind(this)} inputChanged={this.inputChanged.bind(this)} inputValue={this.state.inputValue} placeholder="Enter city" isLoading={this.state.isLoading} />
         <div className="block favs">
       {this.state.favs.map((el, i)=>{
