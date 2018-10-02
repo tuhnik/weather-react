@@ -30,7 +30,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {inputValue: '', searchTerm: '', weatherData: null, error: null, isLoading: false, coord: {lat: 58.24, lon: 25.92},
-  favs: ["Tartu, EE", "Tarvastu, EE", "Mustla, EE", "Viimsi, EE"]};
+  favs: ["Tarvastu, EE", "London, GB"]};
   }
   getWeatherData(str) {
     this.setState({isLoading: true})
@@ -103,7 +103,6 @@ class App extends Component {
             {el}
             <button class="delete is-small" onClick={(evt)=>this.removeFromFavs(evt,i)}></button>
           </span>
-       
       })}
        </div>
         {this.state.weatherData &&       <div className="card card-container">
@@ -112,7 +111,7 @@ class App extends Component {
             <div className="card-content">
               <div className="media">
                 <div className="media-left degrees"> 
-                <p>{this.state.weatherData.main.temp + "°C"}</p>
+                <p>{+(this.state.weatherData.main.temp).toFixed(1) + "°C"}</p>
                 </div>
                 <div className="media-content">
                   <p className="title is-4">{
@@ -126,24 +125,9 @@ class App extends Component {
             </div>
           </div>
         </div>}
-        {this.state.error && 
-      
+        {this.state.error &&   
         <div className="notification is-danger error">{this.state.error.message}</div>
-      
         }
-        {/* <div>
-         {this.state.weatherData && <section className="section">{
-          this.state.weatherData.name + ", " + this.state.weatherData.sys.country + " " + this.state.weatherData.main.temp + "°C"}</section>}     
-         {this.state.error && <div className="notification is-danger">{this.state.error.message}</div>}
-        </div>
-          {this.state.coord && <Map      
-            isMarkerShown
-            coord = {this.state.coord}
-            googleMapURL= {"https://maps.googleapis.com/maps/api/js?key=" + KEYS.MAPS_KEY + "&v=3.exp&libraries=geometry,drawing,places"} 
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-          />}      */}
       </div>;
   }
 }
