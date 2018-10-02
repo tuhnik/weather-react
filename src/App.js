@@ -111,7 +111,7 @@ class App extends Component {
 
   render() {
     return <div className="App container">
-        <h1 className= "title is-2"> <span role="img" aria-label="geolocation"style = {{cursor: "pointer"}}onClick={this.getGeoLocation.bind(this)}>☁️</span> React Weather 0.2</h1>   
+        <h1 className= "title is-2"> <span class = "cloud" onClick={this.getGeoLocation.bind(this)}></span> React Weather 0.2</h1>   
         <InputForm formSubmitted={this.formSubmitted.bind(this)} inputChanged={this.inputChanged.bind(this)} inputValue={this.state.inputValue} placeholder="Enter city" isLoading={this.state.isLoading} />
         <div className="block favs">
       {this.state.favs.map((el, i)=>{
@@ -134,7 +134,7 @@ class App extends Component {
                     this.state.weatherData.name + ", " + this.state.weatherData.sys.country}</p>
                   <p className="subtitle is-5 weather-string">{this.state.weatherData.weather[0].description}</p>
                 </div>
-                {this.checkIfFavs() && <a className="button is-info" onClick={this.addToFavs.bind(this)}>Fav</a>}              
+                {this.checkIfFavs() && <a class = "fav" onClick={this.addToFavs.bind(this)}></a>}              
               </div>
               <div className="content">
               </div>

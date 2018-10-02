@@ -54,3 +54,33 @@ span.tag.light:hover {
 .favs span {
   margin: 5px;
 }
+
+.fav {
+  font-size: 2rem;
+  line-height: 2rem;
+  transition-timing-function: ease-in-out;
+}
+.fav:before {
+  content: "❤️"
+
+}
+
+.fav:hover:before{
+  content: "💖"
+}
+
+span.cloud {
+  position: absolute;
+  left: 0;
+  cursor: pointer;
+}
+.cloud:before {
+  width: 4px;
+  content: "☁️"
+
+}
+
+.cloud:hover:before{
+  width: 4px;
+  content: "⛅️"
+}
